@@ -1,0 +1,11 @@
+.full-width {
+    width: 100%;
+    display: block;
+    margin-bottom: 16px; /* เพิ่มช่องว่างระหว่างฟิลด์แต่ละแถว */
+  }
+  
+  .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+  

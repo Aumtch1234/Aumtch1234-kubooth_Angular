@@ -1,0 +1,29 @@
+<h1 mat-dialog-title class="text-center">เพิ่มกิจกรรม/งาน</h1>
+<div mat-dialog-content>
+  <form>
+    <div class="form-group">
+      <label for="zone_id">ไอดี เพิ่มกิจกรรม/งาน:</label>
+      <input matInput [(ngModel)]="newEvent.event_id" name="event_id" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="event_name">ชื่อ กิจกรรม/งาน: </label>
+      <input matInput [(ngModel)]="newEvent.event_name" name="event_name" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="start_at_date">วันจัดงาน: </label>
+      <input type="date" [(ngModel)]="newEvent.start_at_date" name="start_at_date" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="end_at_date">วันสิ้นสุดการจัดงาน: </label>
+      <input type="date" [(ngModel)]="newEvent.end_at_date" name="end_at_date" class="form-control" required>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions class="d-flex justify-content-between">
+  <button mat-button color="warn" (click)="onCancel()">ปิด</button>
+  <button mat-button color="accent" (click)="onSubmit()" cdkFocusInitial>บันทึกกิจกรรม</button>
+</div>

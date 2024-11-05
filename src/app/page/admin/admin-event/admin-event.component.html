@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between">
+    <h1>กิจกรรม/งาน</h1>
+    <button class="btn btn-outline-info" (click)="openAddEventDialog()">เพิ่มกิจกรรม/งาน</button>
+  </div>
+  
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ไอดีกิจกรรม</th>
+        <th scope="col">ชื่อกิจกรรม/งาน</th>
+        <th scope="col">วันจัดงาน</th>
+        <th scope="col">วันสิ้นสุดการจัดงาน</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{ event.event_id }}</td>
+        <td>{{ event.event_name }}</td>
+        <td>{{ event.start_at_date }}</td>
+        <td>{{ event.end_at_date }}</td>
+      </tr>
+    </tbody>
+  </table>  

@@ -1,0 +1,108 @@
+/* ส่วนของ header และปุ่มปิด */
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: bold;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.close-icon {
+  cursor: pointer;
+  color: #666;
+  font-size: 2rem;
+  transition: color 0.1s ease;
+}
+
+.close-icon:hover {
+  color: #ff0000;
+}
+
+/* เนื้อหาหลักของ dialog */
+.dialog-content {
+  overflow-y: auto; // เปิดการ scroll เฉพาะในแนวตั้ง
+
+  &::-webkit-scrollbar {
+    width: 0; // ซ่อน scrollbar ใน Chrome, Safari, Edge
+    background: transparent;
+  }
+
+  scrollbar-width: none; // ซ่อน scrollbar ใน Firefox
+}
+
+
+/* การ์ดบูธ */
+.booth-card {
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  overflow: hidden;
+}
+
+.booth-card:hover {
+  transform: scale(1.03);
+}
+
+.booth-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.booth-details {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+/* รูปภาพ */
+.booth-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* ข้อมูลบูธ */
+.booth-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  white-space: nowrap;      /* ห้ามข้อความขึ้นบรรทัดใหม่ */
+  overflow: hidden;         /* ซ่อนข้อความที่เกินพื้นที่ */
+  text-overflow: ellipsis;  /* แสดง "..." ท้ายข้อความที่ถูกตัด */
+  max-width: 100%;          /* กำหนดความกว้างสูงสุดให้พื้นที่ข้อความ */
+}
+
+/* สถานะต่างๆ */
+.available {
+  color: green;
+  font-weight: bold;
+}
+
+.pending {
+  color: #ffa500; /* สีเหลือง */
+  font-weight: bold;
+}
+
+.booked {
+  color: red;
+  font-weight: bold;
+}
+
+/* ปุ่มจองบูธ */
+.booking-button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ข้อความเมื่อไม่มีบูธ */
+.no-booth-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  padding: 20px;
+}

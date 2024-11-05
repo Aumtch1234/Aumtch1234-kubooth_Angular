@@ -1,0 +1,32 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    @for(post of data; track post.zone_id) {
+      <div class="col">
+        <div class="card shadow-sm">
+          <a (click)="openModal(post)">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="assets/img/zone/{{post.img}}" alt="" role="img" style="cursor: pointer;">
+          </a>
+          <div class="card-body">
+            <div class="d-flex flex-column h-100">
+              <div class="d-flex justify-content-between align-items-center">
+                <h3 class="truncate-text"><b>{{post.zone_name}}</b></h3>
+              </div>
+              <p><b>กิจกรรม/งาน : </b>{{post.event_name}}</p><br>
+              <div class="mt-auto">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="openModal(post)">
+                      เลือกดูบูธ
+                    </button>
+                  </div>
+                  <small>
+                    <b>จำนวน : </b>{{post.amount_booth}} บูธ
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+  

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; // กำหนดความสูงขั้นต่ำให้เต็มหน้าจอ
+
+  .form-signin {
+    background-color: #f3f7fb; // พื้นหลังของฟอร์ม
+    padding: 2rem; // กำหนด padding ภายในกรอบ
+    border-radius: 10px; // กำหนดมุมโค้งของกรอบ
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // เพิ่มเงาให้กรอบ
+    max-width: 400px; // กำหนดขนาดความกว้างสูงสุดของฟอร์ม
+    width: 100%; // กำหนดความกว้างฟอร์มให้เต็ม
+  }
+
+  // Responsive for larger screens
+  @media (min-width: 768px) {
+    .form-signin {
+      max-width: 500px; // ขยายขนาดของฟอร์มเมื่อหน้าจอใหญ่ขึ้น
+    }
+  }
+
+  // Responsive for smaller screens
+  @media (max-width: 576px) {
+    .form-signin {
+      padding: 1.5rem; // ลดขนาด padding เมื่อหน้าจอเล็ก
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between">
+    <h1>รายงานลูกค้า และ การอนุมัติการจอง</h1>
+    <div>
+      <label class="m-2" for="bookingStatus">เลือกสถานะการจอง: </label>
+      <select id="bookingStatus" [(ngModel)]="bookingStatus" (change)="onStatusChange()" class="form-select">
+        <option value="no_payment">ยังไม่ชำระเงิน</option>
+        <option value="payment">ชำระเงินแล้ว</option>
+        <option value="booth_waiting">อยู่ระหว่างตรวจสอบ</option>
+        <option value="pass_payment">ผ่านการอนุมัติ</option>
+      </select>
+    </div>
+  </div>
+  
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th scope="col">คำนำหน้า</th>
+        <th scope="col">ชื่อ</th>
+        <th scope="col">นามสกุล</th>
+        <th scope="col">โทรศัพท์</th>
+        <th scope="col">ชื่อบูธ</th>
+        <th scope="col">ชื่อโซน</th>
+        <th scope="col">สถานะ</th>
+        <th scope="col" *ngIf="bookingStatus === 'payment' || bookingStatus === 'booth_waiting' || bookingStatus === 'pass_payment'">หลักฐานการโอน</th>
+        <th scope="col" *ngIf="bookingStatus === 'payment'">อนุมัติ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of reportData">
+        <td>{{ data.pname }}</td>
+        <td>{{ data.fname }}</td>
+        <td>{{ data.lname }}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ data.booth_name }}</td>
+        <td>{{ data.zone_name }}</td>
+        <td [ngClass]="{
+            'text-success': data.booking_status === 'ชำระเงินแล้ว' || data.status === 'อนุมัติแล้ว' || data.booking_status === 'อนุมัติแล้ว',
+            'text-warning': data.booking_status === 'จอง' || data.status === 'อยู่ระหว่างการตรวจสอบ'
+          }">
+          {{ data.booking_status || data.status }}
+        </td>
+        <td *ngIf="bookingStatus === 'payment' || bookingStatus === 'booth_waiting' || bookingStatus === 'pass_payment'">
+          <img *ngIf="data.bill_img" [src]="data.bill_img" alt="{{data.bill_img}}" width="100" height="100" />
+        </td>
+        <td *ngIf="bookingStatus === 'payment'">
+          <button class="btn btn-success" style="font-size: 10px;" (click)="approveBooking(data)">อนุมัติ</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

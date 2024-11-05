@@ -1,0 +1,63 @@
+<div *ngIf="bookingData">
+  <div class="row g-5">
+    <!-- Payment Summary Section -->
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-primary">ชำระเงิน</span>
+        <span class="badge bg-primary rounded-pill">PromptPay</span>
+      </h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-center lh-sm">
+          <img src="assets/img/QR_Code/S__22781959.jpg" alt="QR Code" class="img-fluid rounded"
+            style="max-width: 70%; height: auto; border-radius: 20px;" />
+        </li>
+      </ul>
+      <small>หลักฐานการชำระเงิน :</small>
+      <li class="list-group-item">
+        <input class="form-control form-control-sm" id="formFileSm" type="file" name="bill_img" #fileInput />
+      </li>
+      <br />
+
+      <li class="list-group-item d-flex justify-content-between">
+        <span>รวมทั้งหมด (THB)</span>
+        <strong>{{ bookingData.price | currency: 'THB ' : 'symbol' }}</strong>
+      </li>
+    </div>
+
+    <!-- Booth Details Section -->
+    <div class="col-md-7 col-lg-8">
+      <h1 class="mb-3">การชำระเงิน</h1>
+      <div class="d-flex align-items-start flex-wrap" *ngIf="selectedBooth && selectedBooth.length > 0">
+        <img [src]="'assets/img/zone/'+selectedBooth[0]?.img" alt="{{ selectedBooth[0]?.img }}"
+          class="img-fluid" style="width: 100%; max-width: 300px; border-radius: 10px; margin-right: 20px;" />
+        <div class="booth-info" style="max-width: calc(100% - 320px);">
+          <h2><strong>ตรวจสอบความถูกต้อง ก่อนชำระเงิน ✅</strong></h2>
+          <p><strong>ชื่อบูธ: </strong> {{ selectedBooth[0]?.booth_name }}</p>
+          <p><strong>ไอดี: </strong> {{ selectedBooth[0]?.booth_id }}</p>
+          <p><strong>ขนาด: </strong> {{ selectedBooth[0]?.size }}</p>
+          <p ><strong>สถานะ: </strong > <small style="color: yellow; text-shadow: 0.5px 0.5px 1px #000;">{{ selectedBooth[0]?.status }}</small></p>
+          <br />
+        </div>
+      </div><br>
+
+      <!-- Display zoneName and eventName -->
+      <p *ngIf="zoneName.length > 0"><strong>โซน: </strong> {{ zoneName[0]?.zone_name }}</p>
+      <p><strong>สินค้าที่คุณต้องการขาย: </strong> {{ bookingData.products_data }}</p>
+      <p *ngIf="eventName.length > 0"><strong>กิจกรรม: </strong> {{ eventName[0]?.event_name }}</p>   
+         
+
+      <p><strong>ราคา:</strong> {{ bookingData.price | currency: 'THB ' : 'symbol' }}</p>
+    </div>
+  </div>
+
+  <!-- Checkout Button -->
+  <div class="d-flex justify-content-between gap-4" style="position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 1rem;">
+    <button class="w-100 btn btn-danger btn-lg" [routerLink]="['/profile']" type="button">
+      ชำระเงินภายหลัง
+    </button>
+    <button class="w-100 btn btn-success btn-lg" (click)="submitPayment(fileInput)" type="button">
+      ดำเนินการชำระเงิน
+    </button>
+  </div>
+  
+</div>

@@ -1,0 +1,119 @@
+<h2>โปรไฟล์ของฉัน</h2>
+<div *ngIf="userInfo">
+  <div class="border rounded-5">
+    <section class="w-100 p-4" style="background-color: #eee; border-radius: 0.5rem 0.5rem 0 0">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item active" aria-current="page">โปรไฟล์</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="userInfo.user_data">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px" />
+              <h1 class="my-3">{{ userInfo.user_data.pname }}{{ userInfo.user_data.fname }} {{ userInfo.user_data.lname }}</h1>
+              <p class="text-muted mb-2">ยินดีตอนรับ</p>
+              <button type="button" class="btn btn-outline-primary" [routerLink]="['/edit']">แก้ไขข้อมูล</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3"><p class="mb-0">ชื่อ: </p></div>
+                <div class="col-sm-9"><p class="text-muted mb-0">{{ userInfo.user_data.pname }}{{ userInfo.user_data.fname }} {{ userInfo.user_data.lname }}</p></div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3"><p class="mb-0">อีเมล: </p></div>
+                <div class="col-sm-9"><p class="text-muted mb-0">{{ userInfo.user_data.email }}</p></div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-sm-3"><p class="mb-0">โทรศัพท์: </p></div>
+                <div class="col-sm-9"><p class="text-muted mb-0">{{ userInfo.user_data.phone }}</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="align-items-center mb-2">
+                <p class="mb-0">
+                  <span class="text-primary font-italic me-1">รายการ</span> จองบูธทั้งหมด
+                </p><br>
+                <mat-form-field color="accent">
+                  <mat-label>สถานะ</mat-label>
+                  <mat-select [(ngModel)]="selectedStatus">
+                    <mat-option value="">ทั้งหมด</mat-option>
+                    <mat-option value="จอง">จอง</mat-option>
+                    <mat-option value="ชำระเงินแล้ว">ชำระเงินแล้ว</mat-option>
+                    <mat-option value="ยกเลิกการจอง">ยกเลิกการจอง</mat-option>
+                    <mat-option value="อนุมัติแล้ว">อนุมัติแล้ว</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0" style="max-height: 300px; overflow-y: auto">
+                <div class="card-body">
+                  <div *ngIf="getFilteredBookings().length > 0; else noBookings">
+                    <div *ngFor="let booking of getFilteredBookings()">
+                      <hr>
+                      <p><strong>โซน:</strong> {{ booking.zone_name }}</p>
+                      <p><strong>บูธ:</strong> {{ booking.booth_name }}</p>
+                      <p><strong>ไอดีบูธ:</strong> {{ booking.booth_id }}</p>
+                      <p><strong>กิจกรรม:</strong> {{ booking.event_name }}</p>
+                      <p><strong>ราคา:</strong> {{ booking.price | currency: 'THB ' : 'symbol' }}</p>
+                      <p><strong>สถานะ: </strong> 
+                        <span [ngClass]="{
+                          'status-red': booking.booking_status === 'ยกเลิกการจอง',
+                          'status-yellow': booking.booking_status === 'จอง',
+                          'status-green': booking.booking_status === 'อนุมัติแล้ว' || booking.booking_status === 'ชำระเงินแล้ว'
+                        }">{{ booking.booking_status }}</span>
+                      </p>
+                      <div class="d-flex justify-content-between gap-2">
+                        <ng-container *ngIf="booking.booking_status !== 'ชำระเงินแล้ว' && booking.booking_status !== 'อนุมัติแล้ว'; else showViewButton">
+                          <button class="btn btn-outline-danger" style="font-size: 12px;"
+                            (click)="cancelBooking(booking.booking_id)"
+                            [disabled]="['ยกเลิกการจอง', 'ชำระเงินแล้ว', 'อนุมัติแล้ว'].includes(booking.booking_status)">
+                            ยกเลิกจอง
+                          </button>
+                    
+                          <button class="btn btn-outline-success" style="font-size: 12px;"
+                            (click)="goToPayment(booking)" 
+                            [disabled]="['ยกเลิกการจอง', 'ชำระเงินแล้ว', 'อนุมัติแล้ว'].includes(booking.booking_status)">
+                            ไปที่หน้าชำระเงิน
+                          </button>
+                        </ng-container>
+                    
+                        <ng-template #showViewButton>
+                          <button type="button" class="btn btn-outline-info" (click)="goToPayment(booking)">ดูข้อมูลที่จอง</button>
+                        </ng-template>
+                      </div>
+                      <hr />
+                    </div>
+                    
+                    
+                  </div>
+                  <ng-template #noBookings>
+                    <p class="text-muted">ไม่มีข้อมูลการจองบูธ</p>
+                  </ng-template>                   
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+.card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card-text {
+    flex: 1;
+    /* ใช้พื้นที่ที่เหลือ */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* จำนวนบรรทัดที่ต้องการให้แสดง */
+}
+
+.card-img-top {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    /* เพิ่มการเปลี่ยนแปลง */
+}
+
+.card-img-top:hover {
+    transform: scale(1.05);
+    border-radius: 5px;
+    /* เพิ่มขนาดรูปภาพเมื่อโฮเวอร์ */
+}
+
+.modal-body {
+    max-height: 400px;
+    /* กำหนดความสูงสูงสุด */
+    overflow-y: auto;
+    /* เปิดการเลื่อนแนวตั้ง */
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0; // ไม่มี padding
+}
+
+.mat-dialog-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.truncate-text {
+    white-space: nowrap;
+    /* ไม่ให้ขึ้นบรรทัดใหม่ */
+    overflow: hidden;
+    /* ซ่อนข้อความที่เกินขอบเขต */
+    text-overflow: ellipsis;
+    /* แสดง ... เมื่อข้อความยาวเกินไป */
+}

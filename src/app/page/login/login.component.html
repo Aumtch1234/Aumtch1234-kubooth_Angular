@@ -1,0 +1,27 @@
+<div class="container">
+    <main class="form-signin w-100 m-auto">
+        <form id="loginForm">
+            <h1 class="h3 mb-3 fw-normal">เข้าสู่ระบบ</h1>
+            <div class="form-floating">
+                <input type="email" class="form-control my-2" id="floatingInput" placeholder="name@example.com"
+                    name="email" [(ngModel)]="loginObj.email" required/>
+                <label for="floatingInput">อีเมลของคุณ</label>
+            </div>
+            <div class="form-floating">
+                <input [type]="passwordVisible ? 'text' : 'password'" class="form-control my-2" id="myPass"
+                    placeholder="Password" name="password" [(ngModel)]="loginObj.password" required/>
+                <label for="floatingPassword">รหัสผ่านของคุณ</label>
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" style="cursor: pointer" (click)="showPass()" />
+                    แสดงรหัสผ่าน
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" (click)="onLogin($event)">
+                เข้าสู่ระบบ
+            </button><br /><br />
+            <p>คุณต้องการสมัครสมาชิก ? <a [routerLink]="['/register']">กดที่นี่</a> ได้เลย</p>
+        </form>
+    </main>
+</div>

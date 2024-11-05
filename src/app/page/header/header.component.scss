@@ -1,0 +1,44 @@
+
+
+.nav-link {
+    height: 35px;
+    width: auto;
+    font-size: 12px;
+    background-color: #11ff00;
+    color: rgb(255, 255, 255); // สีข้อความ
+    transition: color 0.3s ease, text-decoration 0.3s ease; // เพิ่มการเปลี่ยนแปลงอย่างนุ่มนวล
+    &:hover {
+        color: #000000; // สีเมื่อ hover
+    }
+
+    &.active {
+        color: #000000; // สีเมื่อ active
+        box-shadow: 0 0 0 1px black;
+    }
+}
+
+.flex-btn {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn-nav {
+    width: auto;
+    height: 35px;
+    background-color: #11ff00; // สีพื้นหลังปุ่ม
+    color: #000000; // สีข้อความในปุ่ม
+    border: none; // ไม่มีขอบ
+    transition: background-color 0.3s ease; // การเปลี่ยนแปลงสีอย่างนุ่มนวล
+
+    &:hover {
+        background-color: #11ff00; // สีเมื่อ hover
+    }
+}
+
+.navbar {
+    position: sticky; /* หรือใช้ position: fixed; */
+    top: 0; /* ทำให้ติดที่ด้านบนสุดของหน้า */
+    z-index: 1000; /* จัดลำดับความสำคัญเพื่อให้อยู่เหนือองค์ประกอบอื่นๆ */
+    background-color: #ffffff; /* กำหนดสีพื้นหลังเพื่อไม่ให้โปร่งใส */
+  }

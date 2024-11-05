@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg rounded justify-content-center justify-content-md-between mb-4 border-bottom py-0"
+    aria-label="Thirteenth navbar example">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+            aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
+            <a class="navbar-brand col-lg-3 me-0" href="#">
+                <img 
+                  ngOptimizedImage
+                  class="bi me-2" 
+                  width="80" 
+                  height="80" 
+                  src="assets/img/KUSE_Logo_2021.png" 
+                  alt="KUSE Logo" 
+                  priority />
+            </a>
+              
+            <ul class="navbar-nav col-lg-6 justify-content-lg-center">
+                <li class="nav-item">
+                    <a class="nav-link mx-2" mat-fab extended [routerLink]="['']" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact: true}">
+                        <mat-icon class="mx-2">home</mat-icon> หน้าแรก
+                    </a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" mat-fab extended [routerLink]="['booking']" routerLinkActive="active">
+                        <mat-icon class="mx-2">store</mat-icon> เลือกดูบูธที่นี่
+                    </a>
+                </li>
+            </ul>
+
+            <div class="text-end">
+                <ng-container *ngIf="!isLoggedIn(); else loggedInTemplate">
+                    <div class="flex-btn">
+                        <button mat-fab extended [routerLink]="['login']" class="btn-nav">
+                            <mat-icon>perm_identity</mat-icon>
+                            เข้าสู่ระบบ
+                        </button>
+                        <button mat-fab extended [routerLink]="['register']" class="btn-nav">
+                            <mat-icon>person_add</mat-icon>
+                            สมัครสมาชิก
+                        </button>
+                    </div>
+                </ng-container>
+                <ng-template #loggedInTemplate>
+                    <div class="btn-group">
+                        <a class=" nav-link mx-2" mat-fab extended  [routerLink]="['profile']" routerLinkActive="active"><mat-icon>manage_accounts</mat-icon>
+                            โปร์ไฟล์</a>
+                        <a class="nav-link mx-2" mat-fab extended  (click)="logout()" style="color: #ff0000; cursor: pointer; display: flex;"><mat-icon class="mx-2">exit_to_app</mat-icon>
+                            ออกจากระบบ
+                        </a>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</nav>

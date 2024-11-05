@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>
+  <div class="dialog-header">
+    บูธสำหรับ {{ data.zone_name }}
+
+    <mat-form-field color="accent" style="width: auto; height: 75px;">
+      <mat-label>เลือกสถานะ</mat-label>
+      <mat-select [(value)]="selectedStatus" (selectionChange)="filterBooths()">
+        <mat-option value="">ทั้งหมด</mat-option>
+        <mat-option value="ว่าง">ว่าง</mat-option>
+        <mat-option value="อยู่ระหว่างการตรวจสอบ">อยู่ระหว่างการตรวจสอบ</mat-option>
+        <mat-option value="จองแล้ว">จองแล้ว</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-icon (click)="closeDialog()" class="close-icon">close</mat-icon>
+  </div>
+</h1>
+
+<div mat-dialog-content class="dialog-content">
+  <div *ngIf="filteredBooths && filteredBooths.length > 0; else noBoothTemplate">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
+      <div *ngFor="let booth of filteredBooths" class="col">
+        <div class="card shadow-sm h-100 booth-card">
+          <div class="card-body">
+            <h2 class="booth-title">{{ booth.booth_name }}</h2>
+            <div class="booth-details">
+              <img [src]="'assets/img/zone/'+booth.img" 
+                   style="cursor: pointer;" 
+                   alt="{{ booth.img }}" 
+                   class="booth-image" 
+                   (click)="openImageDialog(booth.img)" />
+
+              <div class="booth-info">
+                <p><b>ไอดีบูธ:</b> {{ booth.booth_id }}</p>
+                <p><b>ขนาด:</b> {{ booth.size }}</p>
+                <p><b>สถานะ: </b>
+                  <span [ngClass]="{
+                      available: booth.status === 'ว่าง',
+                      pending: booth.status === 'อยู่ระหว่างการตรวจสอบ',
+                      booked: booth.status === 'จองแล้ว'
+                    }">{{ booth.status }}</span>
+                </p>
+                <p><b>ราคา:</b> {{ booth.price | currency : "THB " : "symbol" }}</p>
+
+              </div>
+            </div>
+            <!-- เพิ่มเงื่อนไขในการแสดงปุ่มจอง -->
+            <div *ngIf="booth.status === 'จองแล้ว' || booth.status === 'อยู่ระหว่างการตรวจสอบ'; else bookingButton">
+              <button class="btn btn-dark booking-button" disabled>
+                {{booth.status}}
+              </button>
+            </div>
+            <ng-template #bookingButton>
+              <button mat-raised-button
+                      color="accent"
+                      (click)="goToBook(booth)" 
+                      class="booking-button">
+                จองบูธ
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ถ้าไม่มีบูธจะแสดงข้อความนี้ -->
+  <ng-template #noBoothTemplate>
+    <p class="no-booth-message">ไม่พบบูธ หรือ ยังไม่ได้เพิ่มบูธในโซนนี้</p>
+  </ng-template>
+</div>

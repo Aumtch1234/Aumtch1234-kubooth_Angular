@@ -1,0 +1,68 @@
+<div class="container">
+    <main class="form-signin w-100 m-auto">
+      <form (ngSubmit)="onRegister($event)" id="registerForm">
+        <h1 class="h3 mb-3 fw-normal">สมัครสมาชิก</h1>
+  
+        <div class="row g-3 align-items-center">
+          <div class="col-md-3">
+            <div class="form-floating">
+              <select class="form-select" name="pname" [(ngModel)]="registerObj.pname">
+                <option selected>เลือกคำนำหน้า</option>
+                <option value="นาย">นาย</option>
+                <option value="นาง">นาง</option>
+                <option value="นางสาว">นางสาว</option>
+                <option value="เด็กชาย">เด็กชาย</option>
+                <option value="เด็กหญิง">เด็กหญิง</option>
+              </select>
+              <label for="floatingSelect">คำนำหน้า</label>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="form-floating">
+              <input type="text" class="form-control" placeholder="ชื่อ" name="fname" [(ngModel)]="registerObj.fname">
+              <label for="floatingInput">ชื่อ</label>
+            </div>
+          </div>
+  
+          <div class="col-md-5">
+            <div class="form-floating">
+              <input type="text" class="form-control" placeholder="นามสกุล" name="lname" [(ngModel)]="registerObj.lname">
+              <label for="floatingInput">นามสกุล</label>
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-floating my-3">
+          <input type="email" class="form-control" placeholder="อีเมลของคุณ" name="email" [(ngModel)]="registerObj.email">
+          <label for="floatingInput">อีเมลของคุณ</label>
+        </div>
+  
+        <div class="form-floating my-3">
+          <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" placeholder="รหัสผ่านของคุณ" name="password" [(ngModel)]="registerObj.password">
+          <label for="floatingInput">รหัสผ่านของคุณ</label>
+        </div>
+  
+        <div class="form-floating my-3">
+          <input [type]="passwordVisible ? 'text' : 'password'" class="form-control" placeholder="รหัสผ่าน (ยืนยัน)" name="c_password" [(ngModel)]="registerObj.c_password">
+          <label for="floatingInput">รหัสผ่านของคุณ (ยืนยัน)</label>
+        </div>
+  
+        <div class="form-floating my-3">
+          <input type="text" class="form-control" placeholder="เบอร์โทรศัพท์" name="phone" [(ngModel)]="registerObj.phone">
+          <label for="floatingInput">เบอร์โทรศัพท์</label>
+        </div>
+  
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" style="cursor: pointer;" (click)="showPass()"> แสดงรหัสผ่าน
+          </label>
+        </div>
+  
+        <button class="w-100 btn btn-lg btn-primary" type="submit">สมัครสมาชิก</button>
+        <br><br>
+        <p>ถ้าคุณเป็นสมัครสมาชิกแล้ว <a [routerLink]="['/login']">เข้าสู่ระบบ</a></p>
+      </form>
+    </main>
+  </div>
+  

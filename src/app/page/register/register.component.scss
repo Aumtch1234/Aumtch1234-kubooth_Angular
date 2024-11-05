@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; // กำหนดความสูงขั้นต่ำ
+
+  .form-signin {
+    background-color: #f3f7fb; // พื้นหลังของฟอร์ม
+    padding: 2rem; // กำหนด padding
+    border-radius: 10px; // มุมโค้ง
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // เพิ่มเงาให้กรอบ
+    max-width: 600px; // ขยายขนาดความกว้างสูงสุด
+    width: 100%; // กำหนดความกว้าง
+
+    .form-floating {
+      margin-bottom: 1rem; // เพิ่มช่องว่างระหว่าง input
+    }
+
+    .row {
+      margin-bottom: 1rem; // เพิ่มช่องว่างระหว่างแถว
+    }
+  }
+
+  // จัดการ responsive layout
+  @media (min-width: 768px) {
+    .form-signin {
+      max-width: 800px; // ขยายความกว้างฟอร์มสำหรับหน้าจอใหญ่ขึ้น
+    }
+  }
+
+  @media (max-width: 576px) {
+    .form-signin {
+      padding: 1.5rem; // ลด padding สำหรับหน้าจอขนาดเล็ก
+    }
+  }
+}
